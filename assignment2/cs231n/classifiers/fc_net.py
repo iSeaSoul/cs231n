@@ -242,7 +242,7 @@ class FullyConnectedNet(object):
     for layer_idx in xrange(1, self.num_layers):
       # print layer_idx, len(self.bn_params)
       if self.use_batchnorm:
-        temp, cache[layer_idx] = affine_batchmorm_relu_forward(temp, \
+        temp, cache[layer_idx] = affine_batchnorm_relu_forward(temp, \
               self.params['W' + str(layer_idx)], self.params['b' + str(layer_idx)],
               self.params['gamma' + str(layer_idx)], self.params['beta' + str(layer_idx)],
               self.bn_params[layer_idx - 1])
@@ -288,7 +288,7 @@ class FullyConnectedNet(object):
       if self.use_batchnorm:
         dx, grads['W' + str(layer_idx)], grads['b' + str(layer_idx)], \
             grads['gamma' + str(layer_idx)], grads['beta' + str(layer_idx)] = \
-            affine_batchmorm_relu_backward(dx, cache[layer_idx])
+            affine_batchnorm_relu_backward(dx, cache[layer_idx])
       elif self.use_dropout:
         dx, grads['W' + str(layer_idx)], grads['b' + str(layer_idx)] = \
             affine_relu_dropout_backward(dx, cache[layer_idx])
